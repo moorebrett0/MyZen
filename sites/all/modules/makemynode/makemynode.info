@@ -1,0 +1,6 @@
+name = Make my node
+description = makes a node!
+package = Jill and Brett's Creation
+core = 7.x
+files[] = makemynode.module,
+          makemynode.install

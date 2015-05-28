@@ -1,0 +1,10 @@
+<?php
+    function makemynode_menu() {
+        $items = array();
+        $items['your-node-path'] = array(
+            'title' => "My node",
+            'page callback' => "makemynode_enable",
+            'access callback' => TRUE,
+            'type' => MENU_NORMAL_ITEM,
+        );
+    }

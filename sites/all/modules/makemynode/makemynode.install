@@ -1,0 +1,34 @@
+<?php
+/**
+  * Implement hook_enable()
+  */
+
+
+
+function makemynode_enable(){
+    drupal_set_message($message = t('The makemynode module was successfully enabled.'), $type = 'status');
+    $node = new stdClass(); // We create a new node object
+    $node->type = "page"; //Content type
+    $node->title = "Your title goes here";
+    $node->language = LANGUAGE_NONE;
+    $node->path = array('alias' => 'your-node-path');
+    node_object_prepare($node);
+    $node->uid = 1;
+    //Adding standard body field
+    $node->body[$node->language][0]['value'] = 'This is a body text';
+    $node->body[$node->language][0]['summary'] = 'Here goes a summary';
+    $node->body[$node->language][0]['format'] = 'filtered_html';
+    $node = node_submit($node); //Prepare node for a submit
+    node_save($node); //This line gives us a nid
+    // $_SESSION['nid'] = $node->nid;
+
+}
+
+function makemynode_disable () {
+    // $nid = $_SESSION['nid'];
+    
+    $nid_query = db_query("SELECT nid FROM node WHERE uid = 1;");
+
+    node_delete($nid_query);
+
+}
